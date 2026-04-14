@@ -1,0 +1,23 @@
+{
+  "name": "gracias-edward",
+  "version": "1.0.0",
+  "description": "Automatizador de Git creado por Edward",
+  "main": "index.js",
+  "bin": {
+    "gracias-edward": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "git",
+    "automation",
+    "vibe-coding"
+  ],
+  "author": "Edward",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "readline-sync": "^1.4.10"
+  }
+}
