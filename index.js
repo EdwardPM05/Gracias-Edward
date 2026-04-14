@@ -4,7 +4,6 @@ const { execSync } = require('child_process');
 const readline = require('readline-sync');
 const os = require('os');
 
-// Colores ANSI universales (Tus originales)
 const reset = "\x1b[0m", verde = "\x1b[32m", morado = "\x1b[35m";
 const amarillo = "\x1b[33m", rojo = "\x1b[31m", cian = "\x1b[36m";
 
@@ -29,14 +28,11 @@ function commandExists(cmd) {
     return getOutput(checkCmd) !== null;
 }
 
-// --- DETECCIÓN DE MODO ---
-// Si el comando ejecutado contiene "actualiza", entramos en modo rápido.
+
 const esActualizacion = process.argv[1].includes('actualiza-edward');
 
 if (esActualizacion) {
-    // ==========================================
-    // MODO: ACTUALIZA-EDWARD (Solo push rápido)
-    // ==========================================
+
     console.clear();
     console.log(`${cian}\n🔄 --- ACTUALIZANDO REPO (MODO RÁPIDO) --- 🚀${reset}\n`);
 
@@ -54,13 +50,10 @@ if (esActualizacion) {
     console.log(`\n${verde}✨ ¡Actualizado! De nada, Edward. ✨${reset}\n`);
 
 } else {
-    // ==========================================
-    // MODO: GRACIAS-EDWARD (Tu código completo)
-    // ==========================================
+
     console.clear();
     console.log(`${morado}\n🚀 --- DE NADA, ABRIENDO AUTOMATIZADOR --- 🚀${reset}\n`);
 
-    // 1. Config de Git
     let user = getOutput('git config --global user.name');
     if (!user) {
         console.log(`${amarillo}⚠️ Git no está configurado.${reset}`);
@@ -75,7 +68,6 @@ if (esActualizacion) {
         console.log(`${verde}👤 Usuario detectado: ${user}${reset}`);
     }
 
-    // 2. Inicializar y Commit
     console.log(`\n${verde}📦 Preparando archivos...${reset}`);
     run('git init');
     run('git add .');
@@ -89,7 +81,6 @@ if (esActualizacion) {
     run(`git commit -m "${commitMsg}"`);
     run('git branch -M main');
 
-    // Detección de remoto existente
     const existingRemote = getOutput('git remote get-url origin');
     if (existingRemote) {
         console.log(`\n${amarillo}⚠️  Este proyecto ya está enlazado a: ${existingRemote}${reset}`);
@@ -105,7 +96,6 @@ if (esActualizacion) {
         }
     }
 
-    // 3. Menú de Repositorio (Tu lógica de GH CLI)
     console.log(`\n${cian}🌐 MENÚ DE REPOSITORIO${reset}`);
     const opciones = ['Crear repo en GitHub', 'Enlazar a repo existente'];
     const index = readline.keyInSelect(opciones, `${amarillo}¿Que sigue?${reset}`);
